@@ -19,7 +19,7 @@ app.post("/", function(req, res) {
     if(cityName=="") {
         res.redirect("/");
     }
-    const apiKey="5fab81c200587a0ba844deb55cb3a4fc";
+    const apiKey="";
     const url="https://api.openweathermap.org/data/2.5/weather?q="+cityName+"&appid="+ apiKey+ "&units=metric";
     https.get(url, function(response) {
         response.on("data", function(data) {
