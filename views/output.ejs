@@ -36,30 +36,12 @@
       <p style="display: inline-block">Feels Like</p>
       <p style="display: inline-block;" class="temp-current"><%=weatherData.main.feels_like%>℃</p>
       <div class="stats-grid">
-        <div class="each-details">
-          <p>High/Low</p>
-          <p><%=weatherData.main.temp_max%>℃/<%=weatherData.main.temp_min%>℃</p>
-        </div>
-        <div class="each-details">
-          <p>Humidity</p>
-          <p><%=weatherData.main.humidity%>%</p>
-        </div>
-        <div class="each-details">
-          <p>Pressure</p>
-          <p><%=weatherData.main.pressure%>mB</p>
-        </div>
-        <div class="each-details">
-          <p>Visibility</p>
-          <p><%=Math.round(weatherData.visibility/1000)%> KM</p>
-        </div>
-        <div class="each-details">
-          <p>Wind</p>
-          <p><%=weatherData.wind.speed%>kmph</p>
-        </div>
-        <div class="each-details">
-          <p>Clouds</p>
-          <p><%=weatherData.clouds.all%>%</p>
-        </div>
+        <% for(var i=0;i<6;i++) { %>
+          <div class="each-details">
+            <p><%= list[i][0]%></p>
+            <p><%= list[i][1]%></p>
+          </div>
+        <% } %>
       </div>
     </div>
   </div>

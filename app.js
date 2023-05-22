@@ -4,6 +4,7 @@ const express= require("express");
 const app=express();
 const bodyParser=require("body-parser");
 const https= require("https");
+const tools=require("./cal.js")
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:true}));
@@ -19,14 +20,20 @@ app.post("/", function(req, res) {
     if(cityName=="") {
         res.redirect("/");
     }
-    const apiKey="";
+    const apiKey="5fab81c200587a0ba844deb55cb3a4fc";
     const url="https://api.openweathermap.org/data/2.5/weather?q="+cityName+"&appid="+ apiKey+ "&units=metric";
     https.get(url, function(response) {
-        response.on("data", function(data) {
-            const weatherData=JSON.parse(data);
-            res.render('output',{weatherData: weatherData});
-            console.log(weatherData);
-        })
+        console.log(response.statusCode);
+        if(response.statusCode===404){
+            res.send("fail");
+        }
+        else {
+            response.on("data", function(data) {
+                const weatherData=JSON.parse(data);
+                res.render('output',{weatherData: weatherData, list: tools.calculate(weatherData)});
+                console.log(tools.calculate(weatherData));
+            })
+        }
     }) 
 })
 
