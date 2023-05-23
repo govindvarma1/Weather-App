@@ -18,7 +18,7 @@
     <div class="temp-details">
       <div class="temp">
         <p class="temp-current"><%=weatherData.main.temp%>℃</p>
-        <p><%=weatherData.weather[0].main%></p>
+        <p class="type"><%=weatherData.weather[0].main%></p>
         <p>
           <strong>Day</strong> <%=weatherData.main.temp_max%>℃ .
           <strong>Night</strong> <%= weatherData.main.temp_min%>℃
@@ -46,5 +46,7 @@
     </div>
   </div>
 </div>
+
+<script src="../JS/color.js"></script>
 
 <%- include("partials/footer.ejs") %>

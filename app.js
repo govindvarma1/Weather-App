@@ -4,7 +4,7 @@ const express= require("express");
 const app=express();
 const bodyParser=require("body-parser");
 const https= require("https");
-const tools=require("./cal.js")
+const tools=require("./public/JS/cal.js")
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:true}));
@@ -25,12 +25,13 @@ app.post("/", function(req, res) {
     https.get(url, function(response) {
         console.log(response.statusCode);
         if(response.statusCode===404){
+            // res.render('error');
             res.send("fail");
         }
         else {
             response.on("data", function(data) {
                 const weatherData=JSON.parse(data);
-                res.render('output',{weatherData: weatherData, list: tools.calculate(weatherData)});
+                res.render('output',{cityName:cityName, weatherData: weatherData, list: tools.calculate(weatherData)});
                 console.log(tools.calculate(weatherData));
             })
         }
